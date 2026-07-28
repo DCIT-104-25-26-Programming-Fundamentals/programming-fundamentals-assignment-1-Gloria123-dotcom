@@ -33,5 +33,19 @@
 
 # =============================================================================
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
-# =============================================================================
+# ============================================================================
 
+
+def check_if_prime(value):
+    if value < 2:
+        return False
+    for divisor in range(2, value):
+        if value % divisor == 0:
+            return False
+    return True
+
+num = int(input("Enter a number: "))
+if check_if_prime(num):
+    print(f"{num} is a prime number.")
+else:
+    print(f"{num} is NOT a prime number.")
