@@ -1,4 +1,4 @@
-# =============================================================================
+                                                                                                                                                                                                                                                     # =============================================================================
 # PROGRAMMING FUNDAMENTALS — Assignment 7
 # =============================================================================
 #
@@ -79,3 +79,71 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
+
+def add_task(tasks):
+    task = input("Enter task description: ").strip()
+    if task:
+        tasks.append({"task": task, "completed": False})
+        print(f'Successfully added: "{task}"')
+    else:
+        print("Error: Task description cannot be left blank.")
+
+
+def view_tasks(tasks):
+    if not tasks:
+        print("No tasks found in your list.")
+    else:
+        print("\nCurrent Task List:")
+        for idx, item in enumerate(tasks, start=1):
+            status = "✓" if item["completed"] else " "
+            print(f"{idx}. [{status}] {item['task']}")
+        print()
+
+
+def delete_task(tasks):
+    if not tasks:
+        print("Your list is already empty. Nothing to delete.")
+        return
+
+    view_tasks(tasks)
+    try:
+        choice = int(input("Enter the task number you want to delete: "))
+        if 1 <= choice <= len(tasks):
+            removed = tasks.pop(choice - 1)
+            print(f'Deleted task: "{removed["task"]}"')
+        else:
+            print("Error: That task number does not exist.")
+    except ValueError:
+        print("Error: Please enter a valid numerical digit.")
+
+
+def main():
+    tasks = []
+    print("Welcome to your interactive Console To-Do List!")
+
+    while True:
+        print("\n==============================")
+        print("      TO-DO LIST MENU")
+        print("==============================")
+        print("1. Add a Task")
+        print("2. View All Tasks")
+        print("3. Delete a Task")
+        print("4. Quit")
+
+        selection = input("Enter your choice (1-4): ").strip()
+
+        if selection == '1':
+            add_task(tasks)
+        elif selection == '2':
+            view_tasks(tasks)
+        elif selection == '3':
+            delete_task(tasks)
+        elif selection == '4':
+            print("Thank you for using the To-Do List Application. Goodbye!")
+            break
+        else:
+            print("Invalid input! Please enter a number from 1 to 4.")
+
+
+if __name__ == "__main__":
+    main()
